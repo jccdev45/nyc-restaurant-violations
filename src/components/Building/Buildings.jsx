@@ -1,59 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import Building from "./Building";
 
 export default function Buildings({ buildings }) {
-  const [filtered, setFiltered] = useState(buildings);
-
-  const handleChange = (e) => {
-    let defaultList = buildings.map((building) => {
-      return {
-        action: building.action,
-        boro: building.boro,
-        building: building.building,
-        critical: building.critical_flag,
-        cuisine: building.cuisine_description,
-        dba: building.dba.toLowerCase(),
-        grade: building.grade,
-        grade_date: building.grade_date,
-        inspection_date: building.inspection_date,
-        inspection_type: building.inspection_type,
-        lat: building.latitude,
-        lng: building.longitude,
-        phone: building.phone,
-        record_date: building.record_date,
-        score: building.score,
-        street: building.street,
-        violation_code: building.violation_code,
-        violation_description: building.violation_description,
-        zip: building.zipcode,
-      };
-    });
-
-    if (e !== "") {
-      let newList = [];
-      newList = defaultList.filter((building) =>
-        building.dba.includes(e.toLowerCase())
-      );
-      setFiltered(newList);
-    } else {
-      setFiltered(buildings);
-    }
-  };
-
   return (
-    <>
-      <input
-        type="text"
-        className="border-2 border-solid border-black"
-        onChange={(e) => handleChange(e.target.value)}
-      />
-      {filtered.length
-        ? filtered.map((building, index) => (
-            <Building key={index} building={building} />
-          ))
-        : buildings.map((building, index) => (
-            <Building key={index} building={building} />
-          ))}
-    </>
+    <div className="relative container mx-auto flex flex-col justify-center">
+      {buildings.length > 1 ? (
+        buildings.map((building, index) => (
+          <Building key={index} building={building} />
+        ))
+      ) : (
+        <div className="static container text-center bg-gray-200">
+          <img
+            className="object-cover h-64 w-full"
+            src="https://images.unsplash.com/photo-1512749355846-eb142b5cc4a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"
+            alt=""
+          />
+          <span className="absolute inset-x-0 bottom-0 bg-gray-500">Please enter a search term</span>
+        </div>
+      )}
+    </div>
   );
 }
