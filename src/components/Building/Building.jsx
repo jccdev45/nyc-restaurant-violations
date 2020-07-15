@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Building({ building }) {
+export default function Building({ current, total, building }) {
   let {
     action,
     boro,
@@ -18,9 +18,9 @@ export default function Building({ building }) {
 
   function cleanItUp(dirty) {
     let regExWords = /\s'|\s/g;
-    let spaceArr = dba.split(regExWords);
+    let spaced = dirty.split(regExWords);
 
-    spaceArr.forEach((word) => {
+    spaced.forEach((word) => {
       let first = word.charAt(0).toUpperCase();
       let remain = word.slice(1);
       let newWord = first.concat(remain);
@@ -47,23 +47,58 @@ export default function Building({ building }) {
   }
 
   return (
-    <div className="max-w-sm lg:max-w-full px-6 py-4 rounded shadow-lg flex m-5 border-solid border-2 border-gray-200">
-      <div className="text-4xl font-blue-400">{grade}</div>
-      <div className="flex justify-start">
-        <div className="font-bold text-xl">{cleanItUp(dba)}</div>
-        <div className="text-lg">
-          {`${bldg} `} {cleanItUp(street)}
+    <div className="max-w-sm h-sm px-6 py-4 r flex flex-col justify-between items-center m-5 rounded shadow-lg border-solid border-2 border-gray-200">
+      <div className="w-full flex items-center justify-between">
+        <div
+          className={grade ? "text-blue-400 text-6xl" : "text-red-200 text-4xl"}
+        >
+          {grade ? grade : "N/A"}
         </div>
-        <div className="text-lg">{`${boro} ${zip},`}</div>
+        <div className="font-bold text-xl">{cleanItUp(dba)}</div>
       </div>
-      <div className="flex flex-col justify-end items-end">
-        <h3>
-          {`${inspection_type} on`} {dateClean(inspection_date)}
+      {/* <div className="flex justify-start"> */}
+      <div className="w-full flex flex-col justify-end text-right">
+        <div className="text-lg">
+          {`${bldg} `} {cleanItUp(street)} {` ${boro}, ${zip}`}
+        </div>
+      </div>
+      {/* </div> */}
+      <div className="flex flex-col justify-center items-center">
+        <h3 className="text-center">
+          {`${inspection_type}`} ({dateClean(inspection_date)})
         </h3>
-        <h3>{`${action}:`}</h3>
+        <h3>{`${action}`}</h3>
 
         <p>{violation_description}</p>
       </div>
+      <div className="justify-center">
+        <span className="text-blue-300">{current + 1}</span> of{" "}
+        <span className="text-blue-500">{total}</span>
+      </div>
     </div>
+    // <div className="max-w-sm lg:max-w-full h-full px-6 py-4 r flex justify-between items-center m-5 ounded shadow-lg border-solid border-2 border-gray-200">
+    //   <div
+    //     className={grade ? "text-blue-400 text-6xl" : "text-red-200 text-4xl"}
+    //   >
+    //     {grade ? grade : "N/A"}
+    //   </div>
+    //   <div className="flex justify-start">
+    //     <div className="font-bold text-xl">{cleanItUp(dba)}</div>
+    //     <div className="flex flex-col">
+    //       <div className="text-lg">
+    //         {`${bldg} `} {cleanItUp(street)}
+    //       </div>
+    //       <div className="text-lg">{`${boro} ${zip},`}</div>
+    //     </div>
+    //   </div>
+    //   <div className="flex flex-col justify-end items-end text-right">
+    //     <h3>
+    //       {`${inspection_type}`} ({dateClean(inspection_date)})
+    //     </h3>
+    //     <h3>{`${action}`}</h3>
+
+    //     <p>{violation_description}</p>
+    //   </div>
+    // </div>
   );
 }

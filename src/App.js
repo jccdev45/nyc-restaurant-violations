@@ -4,27 +4,47 @@ import Layout from "./shared/layout";
 import Buildings from "./components/Building/Buildings";
 
 function App() {
-  const [buildings, setBuildings] = useState("buildings", []);
+  const apiLimit = "$limit=200";
+  const byNewest = "&$order=inspection_date DESC";
+  const baseUrl = `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
+
+  const [buildings, setBuildings] = useState([]);
   const [word, setWord] = useState("");
-  const [filtered, setFiltered] = useState([]);
+  // const [api, setApi] = useState(baseUrl);
+  const [category, setCat] = useState("");
+  const [categories, setCats] = useState([]);
+  const [filteredBuildings, setFilteredBuildings] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await axios({
-        method: "GET",
-        url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?$limit=10`,
-        headers: {
-          app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
-        },
-      })
-        .then((res) => setBuildings(res.data))
-        .catch((error) => console.error(error));
-    };
     fetchData();
   }, [setBuildings]);
 
-  const handleChange = (e) => {
+  const fetchData = async () => {
+    await axios({
+      method: "GET",
+      url: `${baseUrl}`,
+      headers: {
+        app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
+      },
+    })
+      .then((res) => {
+        setBuildings(res.data);
+
+        let catList = Object.keys(res.data[0]).map((category) => {
+          return category;
+        });
+        setCats(catList);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleChangeCategory = (e) => {
+    setCat(e);
+  };
+
+  const handleChangeSearch = (e) => {
     setWord(e);
+
     let defaultList = buildings.map((building) => {
       return {
         action: building.action,
@@ -51,19 +71,48 @@ function App() {
 
     if (e !== "") {
       let newList = [];
+      // let cat = category;
       newList = defaultList.filter((building) =>
         building.dba.includes(word.toLowerCase())
       );
-      setFiltered(newList);
+      setFilteredBuildings(newList);
     } else {
-      setFiltered(buildings);
+      setFilteredBuildings(buildings);
     }
   };
 
+  // const searchSubmit = search => {
+  //   setApi(`${baseUrl}&$q=${search}`);
+
+  //   await axios({
+  //     method: "GET",
+  //     url: `${api}`,
+  //     headers: {
+  //       app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       setBuildings(res.data);
+  //     })
+  //     .then(
+  //       axios.spread((keys) => {
+  //         console.log(keys);
+  //         // setCats(keys.data)
+  //       })
+  //     )
+  //     .catch((error) => console.error(error));
+  // }
+
   return (
     <div className="flex flex-col min-h-screen container mx-auto">
-      <Layout value={word} handleChange={(e) => handleChange(e.target.value)}>
-        <Buildings buildings={word.length < 1 ? [] : filtered} />
+      <Layout
+        value={word}
+        category={category}
+        categories={categories}
+        handleChangeCategory={(e) => handleChangeCategory(e.target.value)}
+        handleChangeSearch={(e) => handleChangeSearch(e.target.value)}
+      >
+        <Buildings buildings={word.length < 1 ? [] : filteredBuildings} />
       </Layout>
     </div>
   );
