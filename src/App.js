@@ -4,15 +4,15 @@ import Layout from "./shared/layout";
 import Buildings from "./components/Building/Buildings";
 
 function App() {
-  const [buildings, setBuildings] = useState([]);
+  const [buildings, setBuildings] = useState("buildings", []);
   const [word, setWord] = useState("");
-  const [filtered, setFiltered] = useState(buildings);
+  const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       await axios({
         method: "GET",
-        url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?$limit=800`,
+        url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?$limit=10`,
         headers: {
           app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
         },
@@ -21,7 +21,7 @@ function App() {
         .catch((error) => console.error(error));
     };
     fetchData();
-  }, []);
+  }, [setBuildings]);
 
   const handleChange = (e) => {
     setWord(e);
@@ -68,5 +68,30 @@ function App() {
     </div>
   );
 }
+
+// function useLocalStorage(key, initialValue) {
+//   const [storedValue, setStoredValue] = useState(() => {
+//     try {
+//       const item = window.localStorage.getItem(key);
+//       return item ? JSON.parse(item) : initialValue;
+//     } catch (error) {
+//       console.log(error);
+//       return initialValue;
+//     }
+//   });
+
+//   const setValue = (value) => {
+//     try {
+//       const valueToStore =
+//         value instanceof Function ? value(storedValue) : value;
+//       setStoredValue(valueToStore);
+//       window.localStorage.setItem(key, JSON.stringify(valueToStore));
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   return [storedValue, setValue];
+// }
 
 export default App;
