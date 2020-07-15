@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Building({ current, total, building }) {
+export default function Building({ current, total, bldg }) {
   let {
     action,
     boro,
-    bldg,
+    building,
     critical,
     cuisine,
     dba,
@@ -13,8 +13,8 @@ export default function Building({ current, total, building }) {
     inspection_type,
     street,
     violation_description,
-    zip,
-  } = building;
+    zipcode,
+  } = bldg;
 
   function cleanItUp(dirty) {
     let regExWords = /\s'|\s/g;
@@ -59,7 +59,7 @@ export default function Building({ current, total, building }) {
       {/* <div className="flex justify-start"> */}
       <div className="w-full flex flex-col justify-end text-right">
         <div className="text-lg">
-          {`${bldg} `} {cleanItUp(street)} {` ${boro}, ${zip}`}
+          {`${building} `} {cleanItUp(street)} {` ${boro}, ${zipcode}`}
         </div>
       </div>
       {/* </div> */}
@@ -86,7 +86,7 @@ export default function Building({ current, total, building }) {
     //     <div className="font-bold text-xl">{cleanItUp(dba)}</div>
     //     <div className="flex flex-col">
     //       <div className="text-lg">
-    //         {`${bldg} `} {cleanItUp(street)}
+    //         {`${building} `} {cleanItUp(street)}
     //       </div>
     //       <div className="text-lg">{`${boro} ${zip},`}</div>
     //     </div>
