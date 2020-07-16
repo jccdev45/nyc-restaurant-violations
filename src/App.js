@@ -55,10 +55,9 @@ function App() {
           src="https://images.unsplash.com/photo-1512749355846-eb142b5cc4a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"
           alt=""
         />
-        <div className="my-20 p-10 container rounded text-center bg-gray-200">
-          <span className="text-2xl bg-gray-300">
-            Welcome to NYC Health Inspections & Violations Search. Please enter
-            a restaurant name.
+        <div className="my-20 py-10 container rounded text-center bg-gray-200">
+          <span className="flex flex-col text-2xl opacity-50 bg-gray-300">
+            Welcome to NYC Health Inspections & Violations Search.
           </span>
         </div>
         <Buildings loading={loading} buildings={buildings} />
