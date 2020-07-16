@@ -6,7 +6,7 @@ export default function Building({ current, total, bldg }) {
     action,
     boro,
     building,
-    critical,
+    critical_flag,
     cuisine,
     dba,
     grade,
@@ -66,7 +66,12 @@ export default function Building({ current, total, bldg }) {
 
   return (
     <div className="w-full lg:w-1/4 mx-5 px-6 py-4 r flex flex-col justify-between items-center m-5 rounded shadow-lg border-solid border-2 border-gray-200">
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex justify-between items-center w-full">
+        <span>
+          {critical_flag === "N" ? null : (
+            <img src="https://freesvg.org/img/a14.png" className="w-10 h-auto" />
+          )}
+        </span>
         <span>{dateClean(inspection_date)}</span>
       </div>
       <div className="w-full flex items-center justify-between">
@@ -75,7 +80,7 @@ export default function Building({ current, total, bldg }) {
         >
           {grade ? grade : "N/A"}
         </div>
-        <div className="font-bold text-xl">{cleanItUp(dba)}</div>
+        <div className="font-bold text-xl text-right">{cleanItUp(dba)}</div>
       </div>
       <div className="w-full flex flex-col justify-end text-right">
         <div className="text-lg">
@@ -116,6 +121,17 @@ export default function Building({ current, total, bldg }) {
                   {grade ? grade : "N/A"}
                 </div>
                 <div className="font-bold text-xl">{cleanItUp(dba)}</div>
+              </div>
+              <div className="flex justify-between w-full">
+                <div className="flex">
+                  {cuisine ? cuisine : "No cuisine type listed"}
+                </div>
+                <div className="w-full flex flex-col text-right">
+                  <div className="text-lg">
+                    {`${building} `} {cleanItUp(street)}
+                  </div>
+                  <div className="text-lg">{` ${boro}, ${zipcode}`}</div>
+                </div>
               </div>
               <div className="text-lg">{`${inspection_type}`}</div>
               <h3>{`${action}`}</h3>

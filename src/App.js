@@ -59,7 +59,7 @@ function App() {
     <div className="flex flex-col min-h-screen w-screen">
       <Layout handleSubmit={searchSubmit}>
         <Hero />
-        <div ref={bldgRef}>
+        <div className="pt-16" ref={bldgRef}>
           <Buildings loading={loading} buildings={buildings} />
         </div>
       </Layout>

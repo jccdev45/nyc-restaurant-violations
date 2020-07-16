@@ -20,12 +20,12 @@ export default function Hero() {
             stop you from living your best, filthy life you animal.
           </div>
         </span>
-        <ul className="flex-col lg:flex-row flex-wrap justify-center break-normal text-left list-inside mx-auto list-disc text-xl">
-          <li className="mx-5 sm:w-full">N - Not Yet Graded</li>
-          <li className="mx-5 sm:w-full">N/A - No Grade Found</li>
-          <li className="mx-5 sm:w-full">A/B/C - Self-Explanatory</li>
-          <li className="mx-5 sm:w-full">Z - Grade Pending</li>
-          <li className="mx-5 sm:w-full">
+        <ul className="flex-col justify-center break-normal text-left list-inside mx-auto list-disc text-xl">
+          <li className="mx-5">N - Not Yet Graded</li>
+          <li className="mx-5">N/A - No Grade Found</li>
+          <li className="mx-5">A/B/C - Self-Explanatory</li>
+          <li className="mx-5">Z - Grade Pending</li>
+          <li className="mx-5">
             P - "Grade Pending" issued on re-opening following an inspection
             that resulted in a closure
           </li>
