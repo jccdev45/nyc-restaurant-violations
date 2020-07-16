@@ -65,7 +65,7 @@ export default function Building({ current, total, bldg }) {
   }
 
   return (
-    <div className="w-1/4 mx-5 px-6 py-4 r flex flex-col justify-between items-center m-5 rounded shadow-lg border-solid border-2 border-gray-200">
+    <div className="w-full lg:w-1/4 mx-5 px-6 py-4 r flex flex-col justify-between items-center m-5 rounded shadow-lg border-solid border-2 border-gray-200">
       <div className="flex flex-col justify-center items-center">
         <span>{dateClean(inspection_date)}</span>
       </div>
@@ -95,6 +95,7 @@ export default function Building({ current, total, bldg }) {
           Details
         </button>
       </div>
+      {/* TODO: MODAL SECTION TO BE EXTRACTED */}
       {open ? (
         <div
           style={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
@@ -104,7 +105,7 @@ export default function Building({ current, total, bldg }) {
             {/* MODAL */}
             <div
               style={{ marginTop: `30vh` }}
-              className="flex flex-col items-center mx-auto py-5 px-10 relative w-1/2 bg-white z-50"
+              className="flex flex-col items-center w-3/4 lg:w-3/4 mx-auto mt-10 py-5 px-10 relative rounded bg-white z-50"
             >
               <div className="w-full flex items-center justify-between">
                 <div
