@@ -11,7 +11,6 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [buildings, setBuildings] = useState([]);
-  const [api] = useState(baseUrl);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +35,7 @@ function App() {
 
     await axios({
       method: "GET",
-      url: `${api}&$q=${search}`,
+      url: `${baseUrl}&$q=${search}`,
       headers: {
         app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
       },
