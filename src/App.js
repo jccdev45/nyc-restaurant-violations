@@ -48,18 +48,33 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen container mx-auto">
+    <div className="flex flex-col min-h-screen w-screen">
       <Layout handleSubmit={searchSubmit}>
-        <img
-          className="object-cover h-64 w-full"
+        <div
+          style={{
+            backgroundImage: `url(https://images.unsplash.com/photo-1512749355846-eb142b5cc4a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80)`,
+            backgroundSize: `cover`,
+            height: `30rem`,
+          }}
+          className="flex items-center"
+        >
+          <div className="w-1/2 mx-auto py-10 container rounded text-center bg-gray-200">
+            <span className="p-10 flex flex-col text-2xl text-blue-400">
+              Welcome to NYC Health Inspections & Violations Search.
+            </span>
+          </div>
+        </div>
+        {/* <img
+          className="object-cover h-auto w-full"
+          style={{ height: `30rem` }}
           src="https://images.unsplash.com/photo-1512749355846-eb142b5cc4a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"
           alt=""
         />
-        <div className="my-20 py-10 container rounded text-center bg-gray-200">
-          <span className="flex flex-col text-2xl opacity-50 bg-gray-300">
+        <div className="w-1/2 mx-auto my-20 py-10 container rounded text-center bg-gray-200">
+          <span className="p-10 flex flex-col text-2xl text-blue-400">
             Welcome to NYC Health Inspections & Violations Search.
           </span>
-        </div>
+        </div> */}
         <Buildings loading={loading} buildings={buildings} />
       </Layout>
     </div>
