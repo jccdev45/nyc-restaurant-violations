@@ -19,15 +19,20 @@ export default function Filter({ handleSubmit }) {
 
   return (
     <form action="" className="w-full max-w-sm flex">
-      <div className="flex items-center border-b border-b-2 border-blue-200 py-2">
+      <div className="p-1 flex items-center border-b border-b-2 border-blue-400">
         <input
-          className="shadow appearance-none rounded w-full py-2 px-5 text-gray-700 leading-tight focus:outline-none"
+          className="mx-1 py-2 rounded appearance-none bg-transparent w-full px-5 text-gray-700 leading-tight focus:outline-none focus:bg-white"
           placeholder="Search"
           type="text"
           value={search}
           onChange={handleSearchInputChanges}
         />
-        <input onClick={callSearch} type="submit" value="Submit" />
+        <input
+          className="mb-0 py-1 px-5 rounded bg-blue-500 text-white"
+          onClick={callSearch}
+          type="submit"
+          value="Submit"
+        />
       </div>
     </form>
   );
