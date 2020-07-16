@@ -58,23 +58,26 @@ function App() {
           }}
           className="flex items-center"
         >
-          <div className="w-1/2 mx-auto py-10 container rounded text-center bg-gray-200">
-            <span className="p-10 flex flex-col text-2xl text-blue-400">
-              Welcome to NYC Health Inspections & Violations Search.
+          <div className="w-3/4 mx-auto py-10 flex flex-col container rounded text-center bg-gray-200">
+            <span className="w-3/4 mx-auto p-10 flex flex-col text-2xl text-blue-400">
+              <div>Welcome to NYC Health Inspections & Violations Search.</div>
+              <div className="text-lg">
+                Find out just how dirty your favorite restaurant is but don't
+                let it stop you from living your best, filthy life you animal.
+              </div>
             </span>
+            <ul className="flex flex-wrap justify-center break-normal list-outside mx-auto list-disc text-xl">
+              <li className="mx-5">N - Not Yet Graded</li>
+              <li className="mx-5">N/A - No Grade Found</li>
+              <li className="mx-5">A/B/C - Self-Explanatory</li>
+              <li className="mx-5">Z - Grade Pending</li>
+              <li className="mx-5">
+                P - "Grade Pending" issued on re-opening following an inspection
+                that resulted in a closure
+              </li>
+            </ul>
           </div>
         </div>
-        {/* <img
-          className="object-cover h-auto w-full"
-          style={{ height: `30rem` }}
-          src="https://images.unsplash.com/photo-1512749355846-eb142b5cc4a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"
-          alt=""
-        />
-        <div className="w-1/2 mx-auto my-20 py-10 container rounded text-center bg-gray-200">
-          <span className="p-10 flex flex-col text-2xl text-blue-400">
-            Welcome to NYC Health Inspections & Violations Search.
-          </span>
-        </div> */}
         <Buildings loading={loading} buildings={buildings} />
       </Layout>
     </div>
