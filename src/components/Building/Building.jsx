@@ -109,11 +109,14 @@ export default function Building({ current, total, bldg }) {
           style={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
           className="fixed top-0 left-0 w-screen h-screen bg-gray-200 transition-opacity z-30"
         >
-          <div className="overflow-x-hidden overflow-y-auto fixed top-0 left-0 w-full h-full z-40">
+          <div
+            className="overflow-x-hidden overflow-y-auto fixed top-0 left-0 w-full h-full z-50"
+            onClick={toggleModal}
+          >
             {/* MODAL */}
             <div
               // style={{ marginTop: `25vh` }}
-              className="flex flex-col items-center w-3/4 lg:w-3/4 mx-auto m-5 py-5 px-10 relative rounded bg-white z-50"
+              className="flex flex-col items-center w-3/4 lg:w-3/4 mx-auto my-12 py-5 px-10 relative rounded bg-white z-40"
             >
               <div className="w-full flex items-center justify-between">
                 <div
