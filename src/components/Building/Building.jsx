@@ -69,7 +69,10 @@ export default function Building({ current, total, bldg }) {
       <div className="flex justify-between items-center w-full">
         <span>
           {critical_flag === "N" ? null : (
-            <img src="https://freesvg.org/img/a14.png" className="w-10 h-auto" />
+            <img
+              src="https://freesvg.org/img/a14.png"
+              className="w-10 h-auto"
+            />
           )}
         </span>
         <span>{dateClean(inspection_date)}</span>
@@ -106,11 +109,11 @@ export default function Building({ current, total, bldg }) {
           style={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
           className="fixed top-0 left-0 w-screen h-screen bg-gray-200 transition-opacity z-30"
         >
-          <div className="fixed top-0 left-0 w-full h-full z-40">
+          <div className="overflow-x-hidden overflow-y-auto fixed top-0 left-0 w-full h-full z-40">
             {/* MODAL */}
             <div
-              style={{ marginTop: `30vh` }}
-              className="flex flex-col items-center w-3/4 lg:w-3/4 mx-auto mt-10 py-5 px-10 relative rounded bg-white z-50"
+              // style={{ marginTop: `25vh` }}
+              className="flex flex-col items-center w-3/4 lg:w-3/4 mx-auto m-5 py-5 px-10 relative rounded bg-white z-50"
             >
               <div className="w-full flex items-center justify-between">
                 <div
