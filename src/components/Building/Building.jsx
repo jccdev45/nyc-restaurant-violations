@@ -64,8 +64,15 @@ export default function Building({ current, total, bldg }) {
     setOpen(!open);
   }
 
+  const cardStyle = {
+    border: `2px solid blue`,
+  };
+
   return (
-    <div className="flex flex-col items-center justify-between w-full px-6 py-4 m-5 mx-5 border-2 border-gray-200 border-solid rounded shadow-lg lg:w-1/4 r">
+    <div
+      className="flex flex-col items-center justify-between w-full px-6 py-4 m-5 mx-5 border-2 border-gray-200 border-solid rounded shadow-lg lg:w-1/4"
+      style={open ? cardStyle : null}
+    >
       <div className="flex items-center justify-between w-full">
         <span>
           {critical_flag === "N" ? null : (

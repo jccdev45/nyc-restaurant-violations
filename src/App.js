@@ -3,6 +3,7 @@ import axios from "axios";
 import Layout from "./shared/layout";
 import Buildings from "./components/Building/Buildings";
 import Hero from "./components/Hero/Hero";
+import Map from "./components/Map/Map";
 
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -13,6 +14,7 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [buildings, setBuildings] = useState([]);
+
   const bldgRef = useRef(null);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function App() {
         })
         .catch((error) => console.error(error));
     };
+
     fetchData();
   }, []);
 
@@ -58,8 +61,9 @@ function App() {
   return (
     <div className="flex flex-col w-screen min-h-screen">
       <Layout handleSubmit={searchSubmit}>
-        <Hero />
-        <div className="py-16" ref={bldgRef}>
+        {/* <Hero /> */}
+        <Map buildings={buildings} />
+        <div className="py-10" ref={bldgRef}>
           <Buildings loading={loading} buildings={buildings} />
         </div>
       </Layout>

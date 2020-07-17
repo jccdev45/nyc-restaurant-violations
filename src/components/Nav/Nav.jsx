@@ -3,7 +3,7 @@ import Filter from "../Filter/Filter";
 
 export default function Nav({ handleSubmit }) {
   return (
-    <nav className="sticky top-0 z-10 flex items-center justify-between p-5 bg-gray-300">
+    <nav className="sticky top-0 z-20 flex items-center justify-between p-5 bg-gray-300">
       <span>
         <a href="/" className="flex items-center">
           <img
