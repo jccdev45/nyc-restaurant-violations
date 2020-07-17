@@ -3,7 +3,7 @@ import Filter from "../Filter/Filter";
 
 export default function Nav({ handleSubmit }) {
   return (
-    <nav className="p-5 sticky top-0 z-10 flex justify-between items-center bg-gray-300">
+    <nav className="sticky top-0 z-10 flex items-center justify-between p-5 bg-gray-300">
       <span>
         <a href="/" className="flex items-center">
           <img
@@ -11,7 +11,7 @@ export default function Nav({ handleSubmit }) {
             src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/NYC_Health.svg/1200px-NYC_Health.svg.png"
             alt=""
           />
-          <h2 className="hidden lg:block mx-2 uppercase font-bold text-blue-700">
+          <h2 className="hidden mx-2 font-bold text-blue-700 uppercase lg:block">
             Restaurant Violations
           </h2>
         </a>

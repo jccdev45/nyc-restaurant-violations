@@ -56,10 +56,10 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen w-screen">
+    <div className="flex flex-col w-screen min-h-screen">
       <Layout handleSubmit={searchSubmit}>
         <Hero />
-        <div className="pt-16" ref={bldgRef}>
+        <div className="py-16" ref={bldgRef}>
           <Buildings loading={loading} buildings={buildings} />
         </div>
       </Layout>
