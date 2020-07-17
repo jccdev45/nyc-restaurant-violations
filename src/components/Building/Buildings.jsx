@@ -3,7 +3,7 @@ import Building from "./Building";
 
 export default function Buildings({ loading, buildings }) {
   return (
-    <div className="container flex flex-wrap justify-center w-screen mx-auto">
+    <div className="container sticky top-0 flex-col justify-center w-screen px-2 mx-auto overflow-scroll">
       {!loading ? (
         buildings.map((building, index) => (
           <Building

@@ -70,7 +70,7 @@ export default function Building({ current, total, bldg }) {
 
   return (
     <div
-      className="flex flex-col items-center justify-between w-full px-6 py-4 m-5 mx-5 border-2 border-gray-200 border-solid rounded shadow-lg lg:w-1/4"
+      className="flex flex-col items-center justify-between w-full px-6 py-4 mx-auto my-5 border-2 border-gray-200 border-solid rounded shadow-lg"
       style={open ? cardStyle : null}
     >
       <div className="flex items-center justify-between w-full">
@@ -125,7 +125,12 @@ export default function Building({ current, total, bldg }) {
             {/* MODAL */}
             <div
               // style={{ marginTop: `25vh` }}
-              className="relative z-40 flex flex-col items-center w-3/4 px-10 py-5 mx-auto my-12 overflow-y-auto bg-white rounded lg:w-3/4"
+              className="relative z-40 flex flex-col items-center w-3/4 px-5 py-10 overflow-y-auto bg-white rounded lg:w-3/4"
+              style={{
+                top: `50%`,
+                left: `50%`,
+                transform: `translate(-50%, -50%)`,
+              }}
             >
               <div className="flex items-center justify-between w-full">
                 <div

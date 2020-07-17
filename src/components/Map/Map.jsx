@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
+// import { RiMapPin3Line } from "react-icons/ri";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function Map({ buildings }) {
@@ -22,18 +23,9 @@ export default function Map({ buildings }) {
         zoom: mapProps.zoom,
       });
 
-      map.on("load", () => {
-        map.addSource(buildings, {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features: [],
-          },
-        });
+      map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
-        map.addLayer({
-          // id:
-        });
+      map.on("load", () => {
         setMap(map);
         map.resize();
       });
@@ -50,11 +42,30 @@ export default function Map({ buildings }) {
     if (!map) initializeMap({ setMap, mapContainer });
   }, [map]);
 
+  // const loadMarkers = () => {
+  //   return buildings.length !== 0 ? (
+  //     buildings.map((bldg, index) => (
+  //       <Marker
+  //         key={index}
+  //         lat={parseFloat(bldg.latitude)}
+  //         lng={parseFloat(bldg.longitude)}
+  //       >
+  //         <RiMapPin3Line
+  //           id={`marker-${index}`}
+  //           className={`marker-${index} w-3 h-3 cursor-pointer`}
+  //         />
+  //       </Marker>
+  //     ))
+  //   ) : (
+  //     <div></div>
+  //   );
+  // };
+
   return (
-    <div className="sticky z-10" style={{ top: `86px`}}>
-      <div className="container relative">
+    <div>
+      <div className="relative" style={{ zIndex: `-1` }}>
         <div
-          className="absolute bottom-0 left-0 z-10 inline-block p-1 m-5 text-white"
+          className="absolute bottom-0 left-0 inline-block p-1 m-5 text-white"
           style={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
         >
           <div>
@@ -63,10 +74,13 @@ export default function Map({ buildings }) {
           </div>
         </div>
         <div
-          className="w-screen lg:h-64"
+          className="h-screen"
           ref={(el) => (mapContainer.current = el)}
-          style={{ height: `20rem` }}
-        />
+          style={{ width: `70vw` }}
+        >
+          {/* {loadMarkers()} */}
+          {/* <Marker>hi i'm a marker</Marker> */}
+        </div>
       </div>
     </div>
   );
