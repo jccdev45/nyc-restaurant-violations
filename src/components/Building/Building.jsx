@@ -1,7 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { cleanItUp, dateClean, listifyDesc } from "../../utility/sanitize";
 
-export default function Building({ current, total, bldg }) {
+export default function Building({ markerClick, current, total, bldg }) {
   let {
     action,
     boro,
@@ -18,60 +19,29 @@ export default function Building({ current, total, bldg }) {
   } = bldg;
 
   const [open, setOpen] = useState(false);
-
-  function cleanItUp(dirty) {
-    let regExWords = /\s'|\s/g;
-    let spaced = dirty.split(regExWords);
-
-    spaced.forEach((word) => {
-      let first = word.charAt(0).toUpperCase();
-      let remain = word.slice(1);
-      let newWord = first.concat(remain);
-      dirty = dirty.replace(word, newWord);
-    });
-    return dirty;
-  }
-
-  function dateClean(date) {
-    let regEx = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/gm;
-    let dateArr = date.split(regEx);
-
-    let i = dateArr.length;
-
-    let mapped = dateArr.map((item) => item);
-
-    while (i--) {
-      if (regEx.test(mapped[i])) {
-        let yyyyMMDD = dateArr.splice(i, 1).toString();
-        let splitDate = yyyyMMDD.split("-");
-        return `${splitDate[1]} / ${splitDate[2]} / ${splitDate[0]}`;
-      }
-    }
-  }
-
-  function listifyDesc(desc) {
-    let split = desc.split(".");
-    return split.map((sent, index) => {
-      return sent.length > 1 ? (
-        <li key={index} className="my-2">
-          {sent}
-        </li>
-      ) : null;
-    });
-  }
+  // const [hoverRef, isHovered] = useHover();
+  const [selected, toggleSelected] = useState(false);
 
   function toggleModal() {
     setOpen(!open);
   }
 
+  function clickMarker() {
+    toggleSelected(!selected);
+    markerClick(bldg);
+  }
+
   const cardStyle = {
     border: `2px solid blue`,
+    backgroundColor: `rgba(0, 0, 100, 0.1)`,
   };
 
   return (
     <div
-      className="flex flex-col items-center justify-between w-full bg-white px-6 py-4 mx-auto my-5 border-2 border-gray-200 border-solid rounded shadow-lg"
-      style={open ? cardStyle : null}
+      // ref={hoverRef}
+      className="flex flex-col items-center justify-between w-full px-6 py-4 mx-auto my-5 transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer hover:border-blue-600 hover:bg-transparent"
+      style={selected ? cardStyle : null}
+      onClick={clickMarker}
     >
       <div className="flex items-center justify-between w-full">
         <span>
@@ -106,7 +76,7 @@ export default function Building({ current, total, bldg }) {
         </span>
         <button
           onClick={toggleModal}
-          className="px-5 py-3 text-white bg-blue-500 rounded"
+          className="px-5 py-3 text-white transition duration-100 ease-in-out bg-blue-500 rounded hover:bg-blue-700"
           style={{ transition: `all .15s ease ` }}
         >
           Details
@@ -162,7 +132,7 @@ export default function Building({ current, total, bldg }) {
               <button
                 onClick={toggleModal}
                 className="px-5 py-3 text-white bg-blue-500 rounded"
-                style={{ transition: `all .15s ease ` }}
+                style={{ transition: `all .15s ease-in-out ` }}
               >
                 Close
               </button>
@@ -174,4 +144,32 @@ export default function Building({ current, total, bldg }) {
       )}
     </div>
   );
+}
+
+function useHover() {
+  const [value, setValue] = useState(false);
+  const ref = useRef(null);
+
+  // const handleMouseOver = () => setValue(true);
+  // const handleMouseOut = () => setValue(false);
+  const handleClick = () => {
+    setValue(!value);
+  };
+
+  useEffect(() => {
+    const node = ref.current;
+    if (node) {
+      // node.addEventListener("mouseover", handleMouseOver);
+      // node.addEventListener("mouseout", handleMouseOut);
+      node.addEventListener("click", handleClick);
+
+      return () => {
+        // node.removeEventListener("mouseover", handleMouseOver);
+        // node.removeEventListener("mouseout", handleMouseOut);
+        node.removeEventListener("click", handleClick);
+      };
+    }
+  }, [ref, value]);
+
+  return [ref, value];
 }

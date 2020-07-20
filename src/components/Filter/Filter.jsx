@@ -28,7 +28,7 @@ export default function Filter({ handleSubmit }) {
           onChange={handleSearchInputChanges}
         />
         <input
-          className="px-5 py-1 mb-0 text-white bg-blue-500 rounded"
+          className="px-5 py-1 mb-0 text-white transition duration-100 ease-in-out bg-blue-500 rounded hover:bg-blue-700"
           onClick={callSearch}
           type="submit"
           value="Submit"

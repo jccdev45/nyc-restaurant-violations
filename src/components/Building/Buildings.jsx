@@ -1,28 +1,22 @@
 import React from "react";
 import Building from "./Building";
 
-export default function Buildings({ loading, buildings }) {
+export default function Buildings({ loading, bldg, buildings, markerClick }) {
   return (
     <div
-      className="flex sticky px-2 w-1/4 justify-start overflow-scroll bg-gray-100 h-full lg:flex-col z-10"
+      className="sticky z-10 flex justify-start w-1/4 h-full px-2 overflow-scroll bg-gray-100 lg:flex-col"
       style={{ top: `1%` }}
     >
-      {!loading ? (
-        buildings.map((building, index) => (
-          <Building
-            key={index}
-            current={index}
-            loading={loading}
-            bldg={building}
-            total={buildings.length}
-          />
-        ))
-      ) : (
-        <div className="grid grid-cols-1 grid-rows-1">
-          <div className="w-20 h-20 ease-linear border-8 border-t-8 rounded-full lg:w-64 lg:h-64 loader"></div>
-          <div className="w-20 h-20 ease-linear border-8 border-t-8 rounded-full opacity-75 lg:w-64 lg:h-64 loader2"></div>
-        </div>
-      )}
+      {buildings.map((bldg, index) => (
+        <Building
+          key={index}
+          current={index}
+          loading={loading}
+          bldg={bldg}
+          total={buildings.length}
+          markerClick={markerClick}
+        />
+      ))}
     </div>
   );
 }

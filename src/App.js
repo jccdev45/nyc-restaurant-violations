@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Layout from "./shared/layout";
-// import Buildings from "./components/Building/Buildings";
 import Hero from "./components/Hero/Hero";
-import Map from "./components/Map/Map";
+import Main from "./components/Main/Main";
 
 import { data } from "./assets/testData";
-import Main from "./components/Main/Main";
 
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
