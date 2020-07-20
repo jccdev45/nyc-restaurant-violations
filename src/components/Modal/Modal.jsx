@@ -1,5 +1,5 @@
 import React from "react";
-import { cleanItUp, listifyDesc } from "../../utility/sanitize";
+import { listifyDesc } from "../../utility/sanitize";
 
 export default function Modal({ bldg, toggle }) {
   let {
@@ -7,7 +7,7 @@ export default function Modal({ bldg, toggle }) {
     // boro,
     // building,
     // critical_flag,
-    cuisine,
+    // cuisine,
     // dba,
     // grade,
     // inspection_date,
