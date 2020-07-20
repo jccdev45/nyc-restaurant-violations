@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Layout from "./shared/layout";
 import Hero from "./components/Hero/Hero";
 import Main from "./components/Main/Main";
 
 // import { data } from "./assets/testData";
+
+const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 function App() {
   const apiLimit = "$limit=100";
@@ -13,6 +15,8 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [buildings, setBuildings] = useState([]);
+
+  const bldgRef = useRef(null);
 
   useEffect(() => {
     // FOR TEST DATA
@@ -51,15 +55,22 @@ function App() {
       .then((res) => {
         setBuildings(res.data);
         setLoading(false);
+        scrollIt();
       })
       .catch((error) => console.error(error));
+  };
+
+  const scrollIt = () => {
+    scrollToBldg(bldgRef);
   };
 
   return (
     <div className="flex flex-col w-screen min-h-screen">
       <Layout handleSubmit={searchSubmit}>
         <Hero />
-        <Main buildings={buildings} loading={loading} />
+        <div ref={bldgRef}>
+          <Main buildings={buildings} loading={loading} />
+        </div>
       </Layout>
     </div>
   );
