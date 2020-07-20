@@ -1,22 +1,28 @@
 import React from "react";
 import Building from "./Building";
 
-export default function Buildings({ loading, buildings }) {
+export default function Buildings({
+  loading,
+  selected,
+  buildings,
+  markerClick,
+}) {
   return (
-    <div className="container w-screen mx-auto flex flex-wrap justify-center">
-      {!loading ? (
-        buildings.map((building, index) => (
-          <Building
-            key={index}
-            current={index}
-            loading={loading}
-            bldg={building}
-            total={buildings.length}
-          />
-        ))
-      ) : (
-        <div className="loader ease-linear rounded-full border-8 border-t-8 mx-10 h-64 w-64"></div>
-      )}
+    <div
+      className="flex w-screen px-2 py-5 overflow-x-scroll overflow-y-hidden bg-gray-100 lg:overflow-auto lg:sticky lg:w-1/4 lg:h-1/4 lg:flex-col"
+      style={{ minHeight: `300px` }}
+    >
+      {buildings.map((bldg, index) => (
+        <Building
+          key={index}
+          current={index}
+          selected={selected}
+          loading={loading}
+          bldg={bldg}
+          total={buildings.length}
+          markerClick={markerClick}
+        />
+      ))}
     </div>
   );
 }

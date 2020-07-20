@@ -8,10 +8,10 @@ export default function Hero() {
         backgroundSize: `cover`,
         // height: `30rem`,
       }}
-      className="lg:h-auto flex items-center sm:contain"
+      className="flex items-center lg:h-auto sm:contain"
     >
-      <div className="w-3/4 my-5 mx-auto px-3 py-10 flex flex-col container rounded text-center bg-gray-200">
-        <span className="w-full lg:w-3/4 mx-auto p-2 lg:p-10 flex flex-col text-center text-blue-400 border-b-2 border-blue-500">
+      <div className="container flex flex-col w-3/4 px-3 py-10 mx-auto my-5 text-center bg-gray-200 rounded">
+        <span className="flex flex-col w-full p-2 mx-auto text-center text-blue-400 border-b-2 border-blue-500 lg:w-3/4 lg:p-10">
           <div className="text-2xl font-bold">
             Welcome to NYC Health Inspections & Violations Search
           </div>
@@ -20,7 +20,7 @@ export default function Hero() {
             stop you from living your best, filthy life you animal.
           </div>
         </span>
-        <ul className="flex-col justify-center break-normal text-left list-inside mx-auto list-disc text-xl">
+        <ul className="flex-col justify-center mx-auto text-xl text-left break-normal list-disc list-inside">
           <li className="mx-5">N - Not Yet Graded</li>
           <li className="mx-5">N/A - No Grade Found</li>
           <li className="mx-5">A/B/C - Self-Explanatory</li>

@@ -18,17 +18,17 @@ export default function Filter({ handleSubmit }) {
   };
 
   return (
-    <form action="" className="w-full max-w-sm flex">
-      <div className="p-1 flex items-center border-b border-b-2 border-blue-400">
+    <form action="" className="flex w-full max-w-sm ml-10">
+      <div className="flex items-center p-1 border-b-2 border-blue-400">
         <input
-          className="mx-1 py-2 rounded appearance-none bg-transparent w-full px-5 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+          className="w-full px-5 py-2 mx-1 leading-tight text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:bg-white"
           placeholder="Search"
           type="text"
           value={search}
           onChange={handleSearchInputChanges}
         />
         <input
-          className="mb-0 py-1 px-5 rounded bg-blue-500 text-white"
+          className="px-5 py-1 mb-0 text-white transition duration-100 ease-in-out bg-blue-500 rounded hover:bg-blue-700"
           onClick={callSearch}
           type="submit"
           value="Submit"
