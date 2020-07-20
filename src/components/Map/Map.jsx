@@ -18,10 +18,10 @@ export default function Map({
     accessToken: process.env.REACT_APP_MAPBOX_KEY,
   });
 
-  const clickMarker = () => {
+  function clickMarker(building) {
     markerClick(building);
     // togglePopup();
-  };
+  }
 
   // const togglePopup = () => {
   //   setOpen(!open);
@@ -46,7 +46,7 @@ export default function Map({
               parseFloat(bldg.longitude),
               parseFloat(bldg.latitude),
             ]}
-            onClick={clickMarker}
+            onClick={() => clickMarker(bldg)}
           >
             <img
               src={mapIcon}

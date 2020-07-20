@@ -26,16 +26,16 @@ export default function Building({
   const selectedStyle = {
     border: `2px solid blue`,
     backgroundColor: `rgba(0, 0, 100, 0.1)`,
-    minWidth: `75%`,
+    minWidth: `65%`,
   };
 
   const cardStyle = {
-    minWidth: `75%`,
+    minWidth: `65%`,
   };
 
   return (
     <div
-      className="flex flex-col justify-between h-full px-2 mx-2 my-auto transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer lg:h-64 lg:py-3 lg:my-3 lg:px-5 lg:w-full lg:mx-auto hover:border-blue-600 hover:bg-transparent"
+      className="flex flex-col justify-between h-full px-2 mx-2 my-auto transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer min-w-2/3 lg:h-64 lg:py-3 lg:my-3 lg:px-5 md:min-w-1/2 lg:w-full lg:mx-auto hover:border-blue-600 hover:bg-transparent"
       style={selected === bldg ? selectedStyle : cardStyle}
       onClick={clickMarker}
     >
