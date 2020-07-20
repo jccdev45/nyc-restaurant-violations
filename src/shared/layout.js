@@ -6,7 +6,7 @@ export default function Layout({ children, handleSubmit }) {
   return (
     <>
       <Nav handleSubmit={handleSubmit} />
-      <div className="flex-grow">{children}</div>
+      <div className="flex flex-col flex-grow h-full">{children}</div>
       <Footer />
     </>
   );

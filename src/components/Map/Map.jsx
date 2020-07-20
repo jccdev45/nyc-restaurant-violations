@@ -1,24 +1,20 @@
-import React, { useState } from "react";
-import ReactMapboxGl, { Marker } from "react-mapbox-gl";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import React from "react";
+import ReactMapboxGl, { Marker, Layer, Popup } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import Buildings from "../Building/Buildings";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import mapIcon from "../../assets/map-icon.png";
 
-export default function Map({ buildings, loading }) {
-  const [mapProps, setMapProps] = useState({
-    lng: 40.705,
-    lat: -73.9215,
-    zoom: 10,
-  });
-  const [isOpen, toggleOpen] = useState(false)
-
+export default function Map({
+  building,
+  buildings,
+  openPopup,
+  onDrag,
+  markerClick,
+  mapProps,
+}) {
   const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_MAPBOX_KEY,
   });
-
-  const showPopup = (bldg) => (
-    toggleOpen(!isOpen)
-  );
 
   return (
     <Map
@@ -26,30 +22,57 @@ export default function Map({ buildings, loading }) {
       center={[mapProps.lat, mapProps.lng]}
       zoom={[mapProps.zoom]}
       containerStyle={{
-        height: `75vh`,
+        maxHeight: `auto`,
         width: `100vw`,
       }}
+      onDrag={onDrag}
     >
+      {/* <Layer type="symbol" id="marker" layout={{ "icon-image": mapIcon }}> */}
       {buildings.length !== 0 ? (
         buildings.map((bldg, index) => (
+          // <Feature
+          //   key={index}
+          //   coordinates={[
+          //     parseFloat(bldg.longitude),
+          //     parseFloat(bldg.latitude),
+          //   ]}
+          //   onClick={() => markerClick(bldg)}
+          // />
           <Marker
             key={index}
             coordinates={[
               parseFloat(bldg.longitude),
               parseFloat(bldg.latitude),
             ]}
-            onClick={() => showPopup(bldg)}
+            onClick={() => markerClick(bldg)}
           >
-            <FaMapMarkerAlt
-              id={`marker-${index}`}
-              className={`marker-${index} w-5 h-5 cursor-pointer`}
+            <img
+              src={mapIcon}
+              className="cursor-pointer w-5 h-5 hover:w-8 hover:h-8 hover:bg-blue-400 rounded-full"
             />
+            {/* <FaMapMarkerAlt
+                id={`marker-${index}`}
+                className={`marker-${index} w-5 h-5 cursor-pointer`}
+              /> */}
           </Marker>
         ))
       ) : (
         <div></div>
       )}
-      <Buildings loading={loading} buildings={buildings} />
+      {/* </Layer> */}
+      {building && (
+        <Popup
+          anchor="top"
+          coordinates={[
+            parseFloat(building.longitude),
+            parseFloat(building.latitude),
+          ]}
+          onClick={() => openPopup()}
+        >
+          {building.dba}
+        </Popup>
+      )}
+      {/* <Buildings loading={loading} buildings={buildings} /> */}
     </Map>
   );
 }

@@ -5,7 +5,8 @@ import Layout from "./shared/layout";
 import Hero from "./components/Hero/Hero";
 import Map from "./components/Map/Map";
 
-// import { data } from "./assets/testData";
+import { data } from "./assets/testData";
+import Main from "./components/Main/Main";
 
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -21,8 +22,8 @@ function App() {
 
   useEffect(() => {
     // FOR TEST DATA
-    // setBuildings(data);
-    // setLoading(false);
+    setBuildings(data);
+    setLoading(false);
 
     // For API data
     const fetchData = async () => {
@@ -40,7 +41,7 @@ function App() {
         .catch((error) => console.error(error));
     };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   const searchSubmit = async (search) => {
@@ -69,10 +70,11 @@ function App() {
     <div className="flex flex-col w-screen min-h-screen">
       <Layout handleSubmit={searchSubmit}>
         <Hero />
-        <div className="flex h-full" ref={bldgRef}>
+        <Main buildings={buildings} loading={loading} />
+        {/* <div className="flex h-full" ref={bldgRef}>
           <Map buildings={buildings} loading={loading} />
-          {/* <Buildings loading={loading} buildings={buildings} /> */}
-        </div>
+          <Buildings loading={loading} buildings={buildings} />
+        </div> */}
       </Layout>
     </div>
   );
