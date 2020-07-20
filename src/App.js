@@ -4,7 +4,7 @@ import Layout from "./shared/layout";
 import Hero from "./components/Hero/Hero";
 import Main from "./components/Main/Main";
 
-import { data } from "./assets/testData";
+// import { data } from "./assets/testData";
 
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -20,8 +20,8 @@ function App() {
 
   useEffect(() => {
     // FOR TEST DATA
-    setBuildings(data);
-    setLoading(false);
+    // setBuildings(data);
+    // setLoading(false);
 
     // For API data
     const fetchData = async () => {
@@ -39,7 +39,7 @@ function App() {
         .catch((error) => console.error(error));
     };
 
-    // fetchData();
+    fetchData();
   }, []);
 
   const searchSubmit = async (search) => {

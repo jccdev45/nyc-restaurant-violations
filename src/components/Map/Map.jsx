@@ -1,42 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactMapboxGl, { Marker, Popup } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import mapIcon from "../../assets/map-icon.png";
+import Modal from "../Modal/Modal";
 
 export default function Map({
   building,
   buildings,
-  // openPopup,
-  onDrag,
+  open,
+  toggle,
   markerClick,
   mapProps,
 }) {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_MAPBOX_KEY,
   });
 
-  const clickMarker = (bldg) => {
-    markerClick(bldg);
-    togglePopup();
+  const clickMarker = () => {
+    markerClick(building);
+    // togglePopup();
   };
 
-  const togglePopup = () => {
-    // openPopup()
-    setOpen(!open);
-  };
+  // const togglePopup = () => {
+  //   setOpen(!open);
+  // };
 
   return (
     <Map
-      style="mapbox://styles/mapbox/streets-v11"
+      style={`mapbox://styles/mapbox/streets-v11`}
       center={[mapProps.lat, mapProps.lng]}
       zoom={[mapProps.zoom]}
       containerStyle={{
         maxHeight: `auto`,
         width: `100vw`,
       }}
-      onDrag={onDrag}
     >
       {buildings.length !== 0 ? (
         buildings.map((bldg, index) => (
@@ -46,10 +45,11 @@ export default function Map({
               parseFloat(bldg.longitude),
               parseFloat(bldg.latitude),
             ]}
-            onClick={() => clickMarker(bldg)}
+            onClick={clickMarker}
           >
             <img
               src={mapIcon}
+              alt={bldg.dba}
               className="w-8 transition duration-500 ease-in-out rounded-full cursor-pointer h-w-8 hover:bg-blue-400"
             />
           </Marker>
@@ -64,9 +64,9 @@ export default function Map({
             parseFloat(building.longitude),
             parseFloat(building.latitude),
           ]}
-          // onClick={() => openPopup()}
+          className="w-1/4 h-full lg:w-3/4"
         >
-          {building.dba}
+          <Modal bldg={building} toggle={toggle} />
         </Popup>
       )}
     </Map>

@@ -8,26 +8,26 @@ export default function Main({ buildings, loading }) {
     lat: -73.9215,
     zoom: 11,
   });
-  const [bldg, setBldg] = useState(null);
+  const [bldgSt, setBldg] = useState(buildings[0]);
+  const [open, setOpen] = useState(false);
 
   const markerClick = (bldg) => {
-    setBldg(null);
+    // toggle()
+    if (open) {
+      setOpen(false);
+    }
+    setBldg(bldg);
     setMapProps({
       lng: parseFloat(bldg.latitude),
       lat: parseFloat(bldg.longitude),
       zoom: 15,
     });
-    setBldg(bldg);
+    // toggle()
+    setOpen(true);
   };
 
-  const openPopup = () => {
-    setBldg(null);
-  };
-
-  const onDrag = () => {
-    if (bldg) {
-      setBldg(null);
-    }
+  const toggle = () => {
+    setOpen(!open);
   };
 
   return (
@@ -35,16 +35,18 @@ export default function Main({ buildings, loading }) {
       {!loading ? (
         <>
           <Buildings
+            open={open}
+            selected={bldgSt}
             markerClick={markerClick}
             buildings={buildings}
             loading={loading}
-            building={bldg}
+            bldg={bldgSt}
           />
           <Map
-            openPopup={openPopup}
-            onDrag={onDrag}
+            open={open}
+            toggle={toggle}
             markerClick={markerClick}
-            building={bldg}
+            building={bldgSt}
             buildings={buildings}
             mapProps={mapProps}
           />
