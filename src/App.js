@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Layout from "./shared/layout";
-import Buildings from "./components/Building/Buildings";
+// import Buildings from "./components/Building/Buildings";
 import Hero from "./components/Hero/Hero";
 import Map from "./components/Map/Map";
 
-import { data } from "./assets/testData";
+// import { data } from "./assets/testData";
 
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 function App() {
-  const apiLimit = "$limit=20";
+  const apiLimit = "$limit=100";
   const byNewest = "&$order=inspection_date DESC";
   const baseUrl = `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
 
@@ -20,29 +20,28 @@ function App() {
   const bldgRef = useRef(null);
 
   useEffect(() => {
-    setBuildings(data);
-    setLoading(false);
-    // const fetchData = async () => {
-    //   await axios({
-    //     method: "GET",
-    //     url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`,
-    //     headers: {
-    //       app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
-    //     },
-    //   })
-    //     .then((res) => {
-    //       setBuildings(res.data);
-    //       setLoading(false);
-    //     })
-    //     .catch((error) => console.error(error));
-    // };
+    // FOR TEST DATA
+    // setBuildings(data);
+    // setLoading(false);
 
-    // fetchData();
+    // For API data
+    const fetchData = async () => {
+      await axios({
+        method: "GET",
+        url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`,
+        headers: {
+          app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
+        },
+      })
+        .then((res) => {
+          setBuildings(res.data);
+          setLoading(false);
+        })
+        .catch((error) => console.error(error));
+    };
+
+    fetchData();
   }, []);
-
-  const scrollIt = () => {
-    scrollToBldg(bldgRef);
-  };
 
   const searchSubmit = async (search) => {
     setLoading(true);
@@ -60,6 +59,10 @@ function App() {
         scrollIt();
       })
       .catch((error) => console.error(error));
+  };
+
+  const scrollIt = () => {
+    scrollToBldg(bldgRef);
   };
 
   return (

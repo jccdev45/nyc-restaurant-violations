@@ -1,93 +1,55 @@
-import React, { useState, useEffect, useRef } from "react";
-import mapboxgl from "mapbox-gl";
-// import { RiMapPin3Line } from "react-icons/ri";
+import React, { useState } from "react";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Buildings from "../Building/Buildings";
 
 export default function Map({ buildings, loading }) {
-  const [map, setMap] = useState(null);
   const [mapProps, setMapProps] = useState({
-    lng: 40.7799,
+    lng: 40.705,
     lat: -73.9215,
-    zoom: 11,
+    zoom: 10,
   });
-  const mapContainer = useRef(null);
+  const [isOpen, toggleOpen] = useState(false)
 
-  useEffect(() => {
-    const initializeMap = ({ setMap, mapContainer }) => {
-      mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
+  const Map = ReactMapboxGl({
+    accessToken: process.env.REACT_APP_MAPBOX_KEY,
+  });
 
-      const map = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: [mapProps.lat, mapProps.lng],
-        zoom: mapProps.zoom,
-      });
-
-      map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
-
-      map.on("load", () => {
-        setMap(map);
-        map.resize();
-      });
-
-      map.on("move", () => {
-        setMapProps({
-          lng: map.getCenter().lng.toFixed(4),
-          lat: map.getCenter().lat.toFixed(4),
-          zoom: map.getZoom().toFixed(2),
-        });
-      });
-
-      buildings.map((bldg) => {
-        return new mapboxgl.Marker()
-          .setLngLat([parseFloat(bldg.latitude), parseFloat(bldg.longitude)])
-          .addTo(map);
-      });
-    };
-
-    if (!map) initializeMap({ setMap, mapContainer });
-  }, [map]);
-
-  // const loadMarkers = () => {
-  //   return buildings.length !== 0 ? (
-  //     buildings.map((bldg, index) => (
-  //       <Marker
-  //         key={index}
-  //         lat={parseFloat(bldg.latitude)}
-  //         lng={parseFloat(bldg.longitude)}
-  //       >
-  //         <RiMapPin3Line
-  //           id={`marker-${index}`}
-  //           className={`marker-${index} w-3 h-3 cursor-pointer`}
-  //         />
-  //       </Marker>
-  //     ))
-  //   ) : (
-  //     <div></div>
-  //   );
-  // };
+  const showPopup = (bldg) => (
+    toggleOpen(!isOpen)
+  );
 
   return (
-    <div className="flex w-screen h-auto">
-      <div className="relative flex w-screen h-auto">
-        <div
-          className="absolute top-0 right-0 inline-block p-1 m-5 text-white z-10"
-          style={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
-        >
-          <div>
-            Longitude: {mapProps.lng} | Latitude: {mapProps.lat} | Zoom:{" "}
-            {mapProps.zoom}
-          </div>
-        </div>
-        <div
-          className="relative"
-          ref={(el) => (mapContainer.current = el)}
-          style={{ height: `75vh`, width: `100vw` }}
-        >
-          <Buildings loading={loading} buildings={buildings} />
-        </div>
-      </div>
-    </div>
+    <Map
+      style="mapbox://styles/mapbox/streets-v11"
+      center={[mapProps.lat, mapProps.lng]}
+      zoom={[mapProps.zoom]}
+      containerStyle={{
+        height: `75vh`,
+        width: `100vw`,
+      }}
+    >
+      {buildings.length !== 0 ? (
+        buildings.map((bldg, index) => (
+          <Marker
+            key={index}
+            coordinates={[
+              parseFloat(bldg.longitude),
+              parseFloat(bldg.latitude),
+            ]}
+            onClick={() => showPopup(bldg)}
+          >
+            <FaMapMarkerAlt
+              id={`marker-${index}`}
+              className={`marker-${index} w-5 h-5 cursor-pointer`}
+            />
+          </Marker>
+        ))
+      ) : (
+        <div></div>
+      )}
+      <Buildings loading={loading} buildings={buildings} />
+    </Map>
   );
 }
