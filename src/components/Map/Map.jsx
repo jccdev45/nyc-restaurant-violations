@@ -1,7 +1,6 @@
 import React from "react";
-import ReactMapboxGl, { Marker, Layer, Popup } from "react-mapbox-gl";
+import ReactMapboxGl, { Marker, Popup } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import mapIcon from "../../assets/map-icon.png";
 
 export default function Map({
@@ -27,17 +26,8 @@ export default function Map({
       }}
       onDrag={onDrag}
     >
-      {/* <Layer type="symbol" id="marker" layout={{ "icon-image": mapIcon }}> */}
       {buildings.length !== 0 ? (
         buildings.map((bldg, index) => (
-          // <Feature
-          //   key={index}
-          //   coordinates={[
-          //     parseFloat(bldg.longitude),
-          //     parseFloat(bldg.latitude),
-          //   ]}
-          //   onClick={() => markerClick(bldg)}
-          // />
           <Marker
             key={index}
             coordinates={[
@@ -48,18 +38,13 @@ export default function Map({
           >
             <img
               src={mapIcon}
-              className="cursor-pointer w-5 h-5 hover:w-8 hover:h-8 hover:bg-blue-400 rounded-full"
+              className="w-5 h-5 rounded-full cursor-pointer hover:w-8 hover:h-8 hover:bg-blue-400"
             />
-            {/* <FaMapMarkerAlt
-                id={`marker-${index}`}
-                className={`marker-${index} w-5 h-5 cursor-pointer`}
-              /> */}
           </Marker>
         ))
       ) : (
         <div></div>
       )}
-      {/* </Layer> */}
       {building && (
         <Popup
           anchor="top"
@@ -72,7 +57,6 @@ export default function Map({
           {building.dba}
         </Popup>
       )}
-      {/* <Buildings loading={loading} buildings={buildings} /> */}
     </Map>
   );
 }

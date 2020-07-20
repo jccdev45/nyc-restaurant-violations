@@ -6,7 +6,7 @@ export default function Main({ buildings, loading }) {
   const [mapProps, setMapProps] = useState({
     lng: 40.705,
     lat: -73.9215,
-    zoom: 10,
+    zoom: 10.5,
   });
   const [bldg, setBldg] = useState(null);
 
