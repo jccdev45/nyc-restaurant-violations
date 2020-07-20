@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Buildings from "../Building/Buildings";
 import Map from "../Map/Map";
 
@@ -8,20 +8,37 @@ export default function Main({ buildings, loading }) {
     lat: -73.9215,
     zoom: 11,
   });
-  const [bldgSt, setBldg] = useState(buildings[0]);
+  const [bldgSt, setBldg] = useState();
   const [open, setOpen] = useState(false);
 
+  // useEffect(() => {
+  //   const setInitialState = () => {
+  //     setBldg(buildings[0]);
+  //   };
+  //   setInitialState();
+  // }, [buildings]);
+
   const markerClick = (bldg) => {
+    console.log(bldg);
     // toggle()
+    setBldg(bldg);
     if (open) {
       setOpen(false);
     }
-    setBldg(bldg);
     setMapProps({
       lng: parseFloat(bldg.latitude),
       lat: parseFloat(bldg.longitude),
       zoom: 14,
     });
+    // if (!mapProps) {
+    //   setMapProps({
+    //     lng: parseFloat(bldg.latitude),
+    //     lat: parseFloat(bldg.longitude),
+    //     zoom: 14,
+    //   });
+    // } else {
+    //   setMapProps(mapProps);
+    // }
     // toggle()
     setOpen(true);
   };
