@@ -3,7 +3,10 @@ import Building from "./Building";
 
 export default function Buildings({ loading, buildings }) {
   return (
-    <div className="container sticky top-0 flex-col justify-center w-screen px-2 mx-auto overflow-scroll">
+    <div
+      className="flex sticky px-2 w-1/4 justify-start overflow-scroll bg-gray-100 h-full lg:flex-col z-10"
+      style={{ top: `1%` }}
+    >
       {!loading ? (
         buildings.map((building, index) => (
           <Building

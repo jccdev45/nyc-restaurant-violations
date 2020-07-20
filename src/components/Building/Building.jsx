@@ -70,7 +70,7 @@ export default function Building({ current, total, bldg }) {
 
   return (
     <div
-      className="flex flex-col items-center justify-between w-full px-6 py-4 mx-auto my-5 border-2 border-gray-200 border-solid rounded shadow-lg"
+      className="flex flex-col items-center justify-between w-full bg-white px-6 py-4 mx-auto my-5 border-2 border-gray-200 border-solid rounded shadow-lg"
       style={open ? cardStyle : null}
     >
       <div className="flex items-center justify-between w-full">

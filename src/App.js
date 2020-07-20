@@ -5,6 +5,8 @@ import Buildings from "./components/Building/Buildings";
 import Hero from "./components/Hero/Hero";
 import Map from "./components/Map/Map";
 
+import { data } from "./assets/testData";
+
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 function App() {
@@ -18,22 +20,24 @@ function App() {
   const bldgRef = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await axios({
-        method: "GET",
-        url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`,
-        headers: {
-          app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
-        },
-      })
-        .then((res) => {
-          setBuildings(res.data);
-          setLoading(false);
-        })
-        .catch((error) => console.error(error));
-    };
+    setBuildings(data);
+    setLoading(false);
+    // const fetchData = async () => {
+    //   await axios({
+    //     method: "GET",
+    //     url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`,
+    //     headers: {
+    //       app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
+    //     },
+    //   })
+    //     .then((res) => {
+    //       setBuildings(res.data);
+    //       setLoading(false);
+    //     })
+    //     .catch((error) => console.error(error));
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   const scrollIt = () => {
@@ -62,9 +66,9 @@ function App() {
     <div className="flex flex-col w-screen min-h-screen">
       <Layout handleSubmit={searchSubmit}>
         <Hero />
-        <div className="flex" ref={bldgRef}>
-          <Buildings loading={loading} buildings={buildings} />
-          <Map buildings={buildings} />
+        <div className="flex h-full" ref={bldgRef}>
+          <Map buildings={buildings} loading={loading} />
+          {/* <Buildings loading={loading} buildings={buildings} /> */}
         </div>
       </Layout>
     </div>

@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 // import { RiMapPin3Line } from "react-icons/ri";
 import "mapbox-gl/dist/mapbox-gl.css";
+import Buildings from "../Building/Buildings";
 
-export default function Map({ buildings }) {
+export default function Map({ buildings, loading }) {
   const [map, setMap] = useState(null);
   const [mapProps, setMapProps] = useState({
     lng: 40.7799,
@@ -37,6 +38,12 @@ export default function Map({ buildings }) {
           zoom: map.getZoom().toFixed(2),
         });
       });
+
+      buildings.map((bldg) => {
+        return new mapboxgl.Marker()
+          .setLngLat([parseFloat(bldg.latitude), parseFloat(bldg.longitude)])
+          .addTo(map);
+      });
     };
 
     if (!map) initializeMap({ setMap, mapContainer });
@@ -62,10 +69,10 @@ export default function Map({ buildings }) {
   // };
 
   return (
-    <div>
-      <div className="relative" style={{ zIndex: `-1` }}>
+    <div className="flex w-screen h-auto">
+      <div className="relative flex w-screen h-auto">
         <div
-          className="absolute bottom-0 left-0 inline-block p-1 m-5 text-white"
+          className="absolute top-0 right-0 inline-block p-1 m-5 text-white z-10"
           style={{ backgroundColor: `rgba(0, 0, 0, 0.5)` }}
         >
           <div>
@@ -74,12 +81,11 @@ export default function Map({ buildings }) {
           </div>
         </div>
         <div
-          className="h-screen"
+          className="relative"
           ref={(el) => (mapContainer.current = el)}
-          style={{ width: `70vw` }}
+          style={{ height: `75vh`, width: `100vw` }}
         >
-          {/* {loadMarkers()} */}
-          {/* <Marker>hi i'm a marker</Marker> */}
+          <Buildings loading={loading} buildings={buildings} />
         </div>
       </div>
     </div>
