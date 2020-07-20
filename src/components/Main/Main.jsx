@@ -20,7 +20,7 @@ export default function Main({ buildings, loading }) {
     setMapProps({
       lng: parseFloat(bldg.latitude),
       lat: parseFloat(bldg.longitude),
-      zoom: 15,
+      zoom: 14,
     });
     // toggle()
     setOpen(true);
@@ -31,7 +31,10 @@ export default function Main({ buildings, loading }) {
   };
 
   return (
-    <div className="flex flex-grow w-screen" style={{ height: `1032px` }}>
+    <div
+      className="flex flex-col flex-grow w-screen h-full lg:flex-row"
+      style={{ height: `100vh` }}
+    >
       {!loading ? (
         <>
           <Buildings

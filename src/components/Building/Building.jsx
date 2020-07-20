@@ -23,15 +23,20 @@ export default function Building({
     markerClick(bldg);
   }
 
-  const cardStyle = {
+  const selectedStyle = {
     border: `2px solid blue`,
     backgroundColor: `rgba(0, 0, 100, 0.1)`,
+    minWidth: `75%`,
+  };
+
+  const cardStyle = {
+    minWidth: `75%`,
   };
 
   return (
     <div
-      className="flex flex-col items-center justify-between w-full px-6 py-4 mx-auto my-5 transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer hover:border-blue-600 hover:bg-transparent"
-      style={selected === bldg ? cardStyle : null}
+      className="flex flex-col justify-between h-full px-2 mx-2 my-auto transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer lg:h-64 lg:py-3 lg:my-3 lg:px-5 lg:w-full lg:mx-auto hover:border-blue-600 hover:bg-transparent"
+      style={selected === bldg ? selectedStyle : cardStyle}
       onClick={clickMarker}
     >
       <div className="flex items-center justify-between w-full">

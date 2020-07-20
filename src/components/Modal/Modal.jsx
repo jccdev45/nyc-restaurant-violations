@@ -18,7 +18,7 @@ export default function Modal({ bldg, toggle }) {
   } = bldg;
 
   return (
-    <div className="flex flex-col items-center w-full h-full p-5 overflow-y-auto bg-white rounded">
+    <div className="flex flex-col items-center w-full h-full p-5 overflow-y-scroll bg-white rounded">
       {/* <div className="flex items-center justify-between w-full">
         <div
           className={grade ? "text-blue-400 text-6xl" : "text-red-200 text-4xl"}
@@ -27,17 +27,17 @@ export default function Modal({ bldg, toggle }) {
         </div>
         <div className="text-xl font-bold">{cleanItUp(dba)}</div>
       </div> */}
-      <div className="flex justify-startw-full">
+      {/* <div className="flex justify-start w-full">
         <div className="flex">
           {cuisine ? cuisine : "No cuisine type listed"}
         </div>
-        {/* <div className="flex flex-col w-full text-right">
+        <div className="flex flex-col w-full text-right">
           <div className="text-lg">
             {`${building} `} {cleanItUp(street)}
           </div>
           <div className="text-lg">{` ${boro}, ${zipcode}`}</div>
-        </div> */}
-      </div>
+        </div>
+      </div> */}
       <div className="text-lg">{`${inspection_type}`}</div>
       <h3>{`${action}`}</h3>
 

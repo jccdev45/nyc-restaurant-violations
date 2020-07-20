@@ -33,9 +33,10 @@ export default function Map({
       center={[mapProps.lat, mapProps.lng]}
       zoom={[mapProps.zoom]}
       containerStyle={{
-        maxHeight: `auto`,
+        // maxHeight: `auto`,
         width: `100vw`,
       }}
+      className="h-full"
     >
       {buildings.length !== 0 ? (
         buildings.map((bldg, index) => (
@@ -64,7 +65,7 @@ export default function Map({
             parseFloat(building.longitude),
             parseFloat(building.latitude),
           ]}
-          className="w-1/4 h-full lg:w-3/4"
+          className="w-3/4 h-full overflow-y-scroll lg:h-full"
         >
           <Modal bldg={building} toggle={toggle} />
         </Popup>
