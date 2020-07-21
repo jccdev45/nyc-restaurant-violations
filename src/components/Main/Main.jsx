@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Buildings from "../Building/Buildings";
 import Map from "../Map/Map";
 

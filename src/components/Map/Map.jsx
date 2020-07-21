@@ -12,20 +12,13 @@ export default function Map({
   markerClick,
   mapProps,
 }) {
-  // const [open, setOpen] = useState(false);
-
   const Map = ReactMapboxGl({
     accessToken: process.env.REACT_APP_MAPBOX_KEY,
   });
 
   function clickMarker(building) {
     markerClick(building);
-    // togglePopup();
   }
-
-  // const togglePopup = () => {
-  //   setOpen(!open);
-  // };
 
   return (
     <Map
