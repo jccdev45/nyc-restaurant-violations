@@ -11,7 +11,8 @@ const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 function App() {
   const apiLimit = "$limit=100";
   const byNewest = "&$order=inspection_date DESC";
-  const baseUrl = `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
+  // const baseUrl = `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
+  const baseUrlProduction = `https://data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
 
   const [loading, setLoading] = useState(true);
   const [buildings, setBuildings] = useState([]);
@@ -47,7 +48,7 @@ function App() {
 
     await axios({
       method: "GET",
-      url: `${baseUrl}&$q=${search}`,
+      url: `${baseUrlProduction}&$q=${search}`,
       headers: {
         app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
       },
