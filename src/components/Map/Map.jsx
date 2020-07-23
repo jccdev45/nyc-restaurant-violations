@@ -4,6 +4,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapIcon from "../../assets/map-icon.png";
 import Modal from "../Modal/Modal";
 
+const Mapbox = ReactMapboxGl({
+  accessToken: process.env.REACT_APP_MAPBOX_KEY,
+});
+
 export default function Map({
   building,
   buildings,
@@ -12,21 +16,16 @@ export default function Map({
   markerClick,
   mapProps,
 }) {
-  const Map = ReactMapboxGl({
-    accessToken: process.env.REACT_APP_MAPBOX_KEY,
-  });
-
   function clickMarker(building) {
     markerClick(building);
   }
 
   return (
-    <Map
+    <Mapbox
       style={`mapbox://styles/mapbox/streets-v11`}
       center={[mapProps.lat, mapProps.lng]}
       zoom={[mapProps.zoom]}
       containerStyle={{
-        // maxHeight: `auto`,
         width: `100vw`,
       }}
       className="h-full"
@@ -63,6 +62,6 @@ export default function Map({
           <Modal bldg={building} toggle={toggle} />
         </Popup>
       )}
-    </Map>
+    </Mapbox>
   );
 }

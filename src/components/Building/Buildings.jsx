@@ -4,6 +4,7 @@ import Building from "./Building";
 export default function Buildings({
   loading,
   selected,
+  selectedRef,
   buildings,
   markerClick,
 }) {
@@ -17,6 +18,7 @@ export default function Buildings({
           key={index}
           current={index}
           selected={selected}
+          selectedRef={selectedRef}
           loading={loading}
           bldg={bldg}
           total={buildings.length}

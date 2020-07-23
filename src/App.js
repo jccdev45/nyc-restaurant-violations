@@ -1,64 +1,32 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useState, useRef } from "react";
 import Layout from "./shared/layout";
 import Hero from "./components/Hero/Hero";
 import Main from "./components/Main/Main";
-
-// import { data } from "./assets/testData";
+import useFetchData from "./utility/useFetchData";
 
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 function App() {
-  const apiLimit = "$limit=100";
-  const byNewest = "&$order=inspection_date DESC";
-  // const baseUrl = `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
-  const baseUrlProduction = `https://data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
-
-  const [loading, setLoading] = useState(true);
-  const [buildings, setBuildings] = useState([]);
+  const [params] = useState({});
+  const [input, setInput] = useState("");
+  const [search, setSearch] = useState("");
+  const { buildings, loading, error } = useFetchData(params, search);
 
   const bldgRef = useRef(null);
 
-  useEffect(() => {
-    // FOR TEST DATA
-    // setBuildings(data);
-    // setLoading(false);
+  const handleParamChange = (e) => {
+    // const param = e.target.name;
+    const value = e.target.value;
+    setInput(value);
+    // setParams((prevParams) => {
+    //   return { ...prevParams, [param]: value };
+    // });
+  };
 
-    // For API data
-    const fetchData = async () => {
-      await axios({
-        method: "GET",
-        url: `https://cors-anywhere.herokuapp.com/data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`,
-        headers: {
-          app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
-        },
-      })
-        .then((res) => {
-          setBuildings(res.data);
-          setLoading(false);
-        })
-        .catch((error) => console.error(error));
-    };
-
-    fetchData();
-  }, []);
-
-  const searchSubmit = async (search) => {
-    setLoading(true);
-
-    await axios({
-      method: "GET",
-      url: `${baseUrlProduction}&$q=${search}`,
-      headers: {
-        app_token: process.env.REACT_APP_RESTAURANT_VIOLATIONS_APP_TOKEN,
-      },
-    })
-      .then((res) => {
-        setBuildings(res.data);
-        setLoading(false);
-        scrollIt();
-      })
-      .catch((error) => console.error(error));
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    scrollIt();
+    setSearch(input);
   };
 
   const scrollIt = () => {
@@ -67,10 +35,20 @@ function App() {
 
   return (
     <div className="flex flex-col w-screen min-h-screen">
-      <Layout handleSubmit={searchSubmit}>
+      <Layout
+        input={input}
+        handleChange={handleParamChange}
+        handleSubmit={handleSearchSubmit}
+      >
         <Hero />
         <div ref={bldgRef}>
-          <Main buildings={buildings} loading={loading} />
+          {error ? (
+            <div style={{ display: `grid`, placeItems: `center` }}>
+              <h1>Unexpected error, please try refreshing.</h1>
+            </div>
+          ) : (
+            <Main buildings={buildings} loading={loading} />
+          )}
         </div>
       </Layout>
     </div>
