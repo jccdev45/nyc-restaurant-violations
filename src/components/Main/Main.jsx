@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Buildings from "../Building/Buildings";
 import Map from "../Map/Map";
+
+const scrollToSelected = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 export default function Main({ buildings, loading }) {
   const [mapProps, setMapProps] = useState({
@@ -11,16 +13,10 @@ export default function Main({ buildings, loading }) {
   const [bldgSt, setBldg] = useState();
   const [open, setOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const setInitialState = () => {
-  //     setBldg(buildings[0]);
-  //   };
-  //   setInitialState();
-  // }, [buildings]);
+  const selectedRef = useRef(null);
 
   const markerClick = (bldg) => {
     console.log(bldg);
-    // toggle()
     setBldg(bldg);
     if (open) {
       setOpen(false);
@@ -30,21 +26,16 @@ export default function Main({ buildings, loading }) {
       lat: parseFloat(bldg.longitude),
       zoom: 14,
     });
-    // if (!mapProps) {
-    //   setMapProps({
-    //     lng: parseFloat(bldg.latitude),
-    //     lat: parseFloat(bldg.longitude),
-    //     zoom: 14,
-    //   });
-    // } else {
-    //   setMapProps(mapProps);
-    // }
-    // toggle()
+    scrollIt();
     setOpen(true);
   };
 
   const toggle = () => {
     setOpen(!open);
+  };
+
+  const scrollIt = () => {
+    scrollToSelected(selectedRef);
   };
 
   return (
@@ -57,6 +48,7 @@ export default function Main({ buildings, loading }) {
           <Buildings
             open={open}
             selected={bldgSt}
+            selectedRef={selectedRef}
             markerClick={markerClick}
             buildings={buildings}
             loading={loading}
@@ -77,15 +69,6 @@ export default function Main({ buildings, loading }) {
           <div className="w-20 h-20 ease-linear border-8 border-t-8 rounded-full opacity-75 lg:w-64 lg:h-64 loader2"></div>
         </div>
       )}
-      {/* <Buildings building={bldg} buildings={buildings} loading={loading} />
-      <Map
-        openPopup={openPopup}
-        onDrag={onDrag}
-        markerClick={markerClick}
-        building={bldg}
-        buildings={buildings}
-        mapProps={mapProps}
-      /> */}
     </div>
   );
 }

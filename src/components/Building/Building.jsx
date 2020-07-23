@@ -4,6 +4,7 @@ import { cleanItUp, dateClean } from "../../utility/sanitize";
 export default function Building({
   markerClick,
   selected,
+  selectedRef,
   current,
   total,
   bldg,
@@ -38,6 +39,7 @@ export default function Building({
       className="flex flex-col justify-between h-full px-2 mx-2 my-auto transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer min-w-2/3 lg:h-64 lg:py-3 lg:my-3 lg:px-5 md:min-w-1/2 lg:w-full lg:mx-auto hover:border-blue-600 hover:bg-transparent"
       style={selected === bldg ? selectedStyle : cardStyle}
       onClick={clickMarker}
+      ref={selectedRef}
     >
       <div className="flex items-center justify-between w-full">
         <span>
@@ -57,7 +59,8 @@ export default function Building({
         >
           {grade ? grade : "N/A"}
         </div>
-        <div className="text-xl font-bold text-right">{cleanItUp(dba)}</div>
+        <div className="text-xl font-bold text-right">{dba}</div>
+        {/* <div className="text-xl font-bold text-right">{cleanItUp(dba)}</div> */}
       </div>
       <div className="flex flex-col justify-end w-full text-right">
         <div className="text-lg">

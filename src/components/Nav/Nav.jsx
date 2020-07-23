@@ -1,7 +1,7 @@
 import React from "react";
 import Filter from "../Filter/Filter";
 
-export default function Nav({ handleSubmit }) {
+export default function Nav({ value, handleChange, handleSubmit }) {
   return (
     <nav className="sticky top-0 z-20 flex items-center justify-between p-5 bg-gray-300">
       <span>
@@ -16,7 +16,11 @@ export default function Nav({ handleSubmit }) {
           </h2>
         </a>
       </span>
-      <Filter handleSubmit={handleSubmit} />
+      <Filter
+        value={value}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
     </nav>
   );
 }
