@@ -11,11 +11,6 @@ const ACTIONS = {
 
 const baseUrl = `https://cors-anywhere.herokuapp.com/https://data.cityofnewyork.us/resource/43nn-pn8j.json?`;
 
-// const apiLimit = "$limit=100";
-// const byNewest = "&$order=inspection_date DESC";
-// const baseUrl = `https://cors-anywhere.herokuapp.com/https://data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
-// const baseUrlProduction = `https://data.cityofnewyork.us/resource/43nn-pn8j.json?${apiLimit}${byNewest}`;
-
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.MAKE_REQUEST:
@@ -29,8 +24,6 @@ function reducer(state, action) {
         error: action.payload.error,
         buildings: [],
       };
-    // case ACTIONS.UPDATE_HAS_NEXT_PAGE:
-    //   return { ...state, hasNextPage: action.payload.hasNextPage };
     default:
       return state;
   }
@@ -60,6 +53,7 @@ export default function useFetchData(params, search) {
           $limit: 100,
           $where: "latitude > 40",
           $q: search,
+          $order: 'inspection_date DESC'
         },
       })
       .then((res) => {

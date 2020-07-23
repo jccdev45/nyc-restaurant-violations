@@ -43,7 +43,7 @@ export default function Map({
             <img
               src={mapIcon}
               alt={bldg.dba}
-              className="w-8 transition duration-500 ease-in-out rounded-full cursor-pointer h-w-8 hover:bg-blue-400"
+              className="w-5 h-5 transition duration-500 ease-in-out rounded-full cursor-pointer hover:bg-blue-400"
             />
           </Marker>
         ))

@@ -36,7 +36,7 @@ export default function Building({
 
   return (
     <div
-      className="flex flex-col justify-between h-full px-2 mx-2 my-auto transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer min-w-2/3 lg:h-64 lg:py-3 lg:my-3 lg:px-5 md:min-w-1/2 lg:w-full lg:mx-auto hover:border-blue-600 hover:bg-transparent"
+      className="flex flex-col justify-between h-full p-3 mx-2 my-auto transition duration-100 ease-in-out bg-white border-2 border-gray-200 border-solid rounded shadow-lg cursor-pointer md:px-6 min-w-2/3 lg:py-3 lg:my-3 lg:px-5 md:min-w-1/2 lg:w-full lg:mx-auto hover:border-blue-600 hover:bg-transparent"
       style={selected === bldg ? selectedStyle : cardStyle}
       onClick={clickMarker}
       ref={selectedRef}
@@ -51,7 +51,9 @@ export default function Building({
             />
           )}
         </span>
-        <span>{dateClean(inspection_date)}</span>
+        <span className="p-2 rounded-full shadow">
+          {dateClean(inspection_date)}
+        </span>
       </div>
       <div className="flex items-center justify-between w-full">
         <div
