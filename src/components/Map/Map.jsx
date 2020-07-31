@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMapboxGl, { Marker, Popup } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import mapIcon from "../../assets/map-icon.png";
+import mapIcon from "../../assets/images/map-icon.png";
 import Modal from "../Modal/Modal";
 
 const Mapbox = ReactMapboxGl({

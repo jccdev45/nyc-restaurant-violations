@@ -7,20 +7,15 @@ import useFetchData from "./utility/useFetchData";
 const scrollToBldg = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 function App() {
-  const [params] = useState({});
   const [input, setInput] = useState("");
   const [search, setSearch] = useState("");
-  const { buildings, loading, error } = useFetchData(params, search);
+  const { buildings, loading, error } = useFetchData(search);
 
   const bldgRef = useRef(null);
 
-  const handleParamChange = (e) => {
-    // const param = e.target.name;
+  const handleChange = (e) => {
     const value = e.target.value;
     setInput(value);
-    // setParams((prevParams) => {
-    //   return { ...prevParams, [param]: value };
-    // });
   };
 
   const handleSearchSubmit = (e) => {
@@ -37,7 +32,7 @@ function App() {
     <div className="flex flex-col w-screen min-h-screen">
       <Layout
         input={input}
-        handleChange={handleParamChange}
+        handleChange={handleChange}
         handleSubmit={handleSearchSubmit}
       >
         <Hero />

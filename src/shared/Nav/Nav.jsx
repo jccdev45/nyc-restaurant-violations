@@ -1,5 +1,5 @@
 import React from "react";
-import Filter from "../Filter/Filter";
+import Filter from "./Filter/Filter";
 
 export default function Nav({ value, handleChange, handleSubmit }) {
   return (

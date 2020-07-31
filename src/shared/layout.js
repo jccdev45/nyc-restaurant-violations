@@ -1,6 +1,6 @@
 import React from "react";
-import Nav from "../components/Nav/Nav";
-import Footer from "../components/Footer/Footer";
+import Nav from "./Nav/Nav";
+import Footer from "./Footer/Footer";
 
 export default function Layout({ children, value, handleSubmit, handleChange }) {
   return (

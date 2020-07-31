@@ -16,7 +16,6 @@ export default function Main({ buildings, loading }) {
   const selectedRef = useRef(null);
 
   const markerClick = (bldg) => {
-    console.log(bldg);
     setBldg(bldg);
     if (open) {
       setOpen(false);

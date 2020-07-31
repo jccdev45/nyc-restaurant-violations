@@ -29,7 +29,7 @@ function reducer(state, action) {
   }
 }
 
-export default function useFetchData(params, search) {
+export default function useFetchData(search) {
   const [state, dispatch] = useReducer(reducer, {
     buildings: [],
     loading: true,
@@ -66,7 +66,7 @@ export default function useFetchData(params, search) {
     return () => {
       cancelToken.cancel();
     };
-  }, [params, search]);
+  }, [search]);
 
   return state;
 }
