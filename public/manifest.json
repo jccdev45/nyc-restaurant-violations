@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "NYC Health Inspections",
+  "name": "NYC Health Inspections",
   "icons": [
     {
       "src": "favicon.ico",
