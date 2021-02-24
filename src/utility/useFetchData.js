@@ -9,7 +9,7 @@ const ACTIONS = {
   UPDATE_HAS_NEXT_PAGE: "update-has-next-page",
 };
 
-const baseUrl = `https://cors-anywhere.herokuapp.com/https://data.cityofnewyork.us/resource/43nn-pn8j.json?`;
+const baseUrl = `https://data.cityofnewyork.us/resource/43nn-pn8j.json?`;
 
 function reducer(state, action) {
   switch (action.type) {

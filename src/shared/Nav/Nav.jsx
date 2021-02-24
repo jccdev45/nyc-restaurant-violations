@@ -8,7 +8,7 @@ export default function Nav({ value, handleChange, handleSubmit }) {
         <a href="/" className="flex items-center">
           <img
             className="object-cover h-10"
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/NYC_Health.svg/1200px-NYC_Health.svg.png"
+            src="https://qns.com/wp-content/uploads/2019/12/nyc-health-logo.png"
             alt=""
           />
           <h2 className="hidden mx-2 font-bold text-blue-700 uppercase lg:block">
